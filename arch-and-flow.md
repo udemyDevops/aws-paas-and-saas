@@ -12,8 +12,8 @@
 * route53 ---> for DNS
 * Cloud Front ---> for CDN (content delivery network)
 
-![alt text](aws-paas-arch.png)
+![alt text](screenshots/aws-paas-arch.png)
 
-![alt text](execution-flow-part-1.png)
+![alt text](screenshots/execution-flow-part-1.png)
 
-![alt text](execution-flow-part-2.png)
+![alt text](screenshots/execution-flow-part-2.png)
