@@ -22,7 +22,7 @@
     1. select the engine as mysql and version as 8.0.x
     2. credential settings 
         - admin (default username) 
-        - password --> select auto generate (which can be retrieved when the instance is created by clicking 'view credentials')
+        - password --> select auto generate (which can be retrieved when the instance is getting created by clicking 'view credentials')
     3. connectivity --> select the subnet group --> select the security group created for backend
     4. Additional configuration 
         - give the DB name 'accounts' (used for vprofile) 
