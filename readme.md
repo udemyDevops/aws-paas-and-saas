@@ -1,4 +1,4 @@
-### Steps to set up the paas and saas arch as per the details in 'arch-and-flow.md'
+### Steps to set up the paas and saas arch as per the details in [text](arch-and-flow.md)
 
 * Fisrt make sure to select the same region for creating the resources
 
