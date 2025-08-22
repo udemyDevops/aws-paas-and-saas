@@ -28,4 +28,4 @@
         - give the DB name 'accounts' (used for vprofile) 
         - select the parameter group 
         - uncheck the automated backup (only for this practice)
-        - log exports --> leave unccheked (only for this practice)
+        - log exports --> leave unchecked (only for this practice)
