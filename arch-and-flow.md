@@ -1,7 +1,8 @@
 ### vprofile project using paas & saas
 * Beanstack ---> for app, it will have the below managed resources
-    - VM for tomcat (app server)
-    - load balancing
+    - ec2 for tomcat (app server) with a security group
+    - ELB for load balancing with a security group
+    - SGs will have the rules added to allow traffic from ALB to ec2 instnaces
     - autoscaling
     - storage (s3 or EFS), can also use custom storage
 
