@@ -4,9 +4,9 @@
 
 * Create a security group for backend
     - add an inbound rule after the SG is created (to get the SG Id) to allow the traffic within the SG
-    - later an inbound rule to allow traffic from beanstack SG for ec2 after the creation of beanstack
+    - later an inbound rule to allow traffic from beanstalk SG for ec2 after the creation of beanstalk
 
-* Create a key pair used to login to beanstack ec2 instance for any troubleshooting
+* Create a key pair used to login to beanstalk ec2 instance for any troubleshooting
 
 * Create the RDS instance --> DB instance
     > Note: In real time there may be a case of changing the parameter of Database but in RDS no login option (like ssh) to change the configuration file. To change any parameter, we can make use of parameter group. We can create a parameter group and select it while creating RDS. This allows to make changes to parameter group settings whenever required which will be reflected in RDS instance.
