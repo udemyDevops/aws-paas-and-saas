@@ -124,3 +124,56 @@
     exit
     ```
 
+* Delete the ec2 instance
+
+* Create Beanstalk
+    - First we need to create IAM roles for Beanstalk
+        > Beanstalk creates a role whic we can select but it lack certain permissions for this project, so create an IAM role and select it
+        * IAM --> roles
+        1. create role --> trusted entity type as 'AWS service'
+        2. service or use case --> ec2 --> Next
+        3. Permission policies --> search for bean and select the below policies
+            - AdministratorAccess-AWSElasticBeanstalk
+            - AWSElasticBeanstalkCustomPlatformforEC2Role
+            - AWSElasticBeanstalkRoleSNS
+            - AWSElasticBeanstalkWebTier
+        4. Next --> give a name to the role --> create role
+    
+    - Search for Amazon Elastic Beanstalk --> create application
+        1. environment tier --> web server environment
+        2. give application name (eg: vprofile-beanapp)
+        3. give environment name (eg: vprofile-beanapp-prd)
+        > Note: One Beanstalk environment can have applications for different environments (dev, test, stg, prd..) and also have other services like autoscaling group, ec2 instances, ELBs, s3 bucket..., in one Beanstalk application we can have multiple environments.
+        4. give a domain name (eg: vprorearch12n3, unique across aws)
+        5. Patform type --> Managed 
+            - platform --> Tomcat
+            - platform branch --> tomcat10 with corretto21 (or corretto17 --> java17)
+            - version --> recommended
+        6. Application --> sample application for initial creation and later the artifact can be uploaded
+        7. Presets --> custom configuration --> Next
+        8. Server access
+            - server role --> default role (if not there, click on Create role besdie to the option)
+            - ec2 instance profile --> select the role creates earlier
+            - select the key pair --> Next
+        9. select the vpc
+        10. instance settings --> tick the 'Activated' box for public IP address
+        11. instance subnets --> select all the subnets
+        12. Database --> do not select anything as we already created RDS instance
+            > Note: Beanstalk has the option to create RDS
+        13. Next --> Instances
+            - root volume --> change from container default to 'General Purpose 3(SSD)'
+            - ec2 security group --> Beanstalk create a SG by itself, later we can add the rules.
+        14. Capacity
+            - Autoscaling Group --> environment type --> load balanced --> 2 as min and 4 as max instances
+            - instance type --> select the smallest one (t2.micro)
+            - scaling triggers --> NetworkOut and other values (go with default)
+        15. Load balancer network settings
+            - visibility --> public --> make sure the subnets are selected
+        16. load balancer type --> ALB and Dedicated
+        17. listeners --> leave the default port 80
+            > Note: vprofile when hosted on ec2 (tomcat listens on port 8080) but in Beanstalk it is port 80
+        18. processes --> edit the 'default' --> Sessions --> Session stickiness -> tick the box 'Enabled'
+
+    
+
+
