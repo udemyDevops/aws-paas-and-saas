@@ -96,8 +96,12 @@
     ```
     git clone https://github.com/hkhcoder/vprofile-project.git
     ```
+    - change the branch
+    ```
+    git checkout awsrefactor
+    ```
 
-    or
+    or use the below repo
 
     ```
     git clone https://github.com/udemyDevops/aws-paas-and-saas.git
