@@ -35,15 +35,15 @@
     - create a subnet group (required for ElastiCache)
     - Go to ElastiCache dashboard --> create Memcached
         >If the deployment option is 'serverless' --> click on create. Otherwise, for 'design your own cache' follow below steps
-        1. select 'Standard create'
-        2. Engine version --> 1.6.x (for vprofile)
-        3. port --> 11211 (default, if it different change it to 11211 for vprofile)
-        4. select the parameter group created for Memcached
-        5. Node type --> select the smallest one (for vprofile --> cache.t2.micro)
-        6. Subnet group settings --> select the subnet group
-        7. Availability zone --> no preference (default for vprofile)
-        8. Next --> security group --> manage --> select the Sg created for Backend
-        9. Maintenance --> no preference
+    1. select 'Standard create'
+    2. Engine version --> 1.6.x (for vprofile)
+    3. port --> 11211 (default, if it different change it to 11211 for vprofile)
+    4. select the parameter group created for Memcached
+    5. Node type --> select the smallest one (for vprofile --> cache.t2.micro)
+    6. Subnet group settings --> select the subnet group
+    7. Availability zone --> no preference (default for vprofile)
+    8. Next --> security group --> manage --> select the Sg created for Backend
+    9. Maintenance --> no preference
 
 * Create Amazon MQ --> for RabbitMQ
     - Search for Amazon MQ --> Get started
@@ -52,8 +52,8 @@
     - Broker instance type --> select the smallest one (mq.t3.micro for vprofile)
     - RabbitMQ access --> provide username and password (save it as they have to be updated in the application.properties file)
     - Advanced settings
-        1. Broker engine version --> 3.13
-        2. Network and security --> private access and select the Backend security group
+    1. Broker engine version --> 3.13
+    2. Network and security --> private access and select the Backend security group
     - Next and Create Broker
 
 * 
