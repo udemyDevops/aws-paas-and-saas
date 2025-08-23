@@ -173,6 +173,21 @@
     17. listeners --> leave the default port 80
         > Note: vprofile when hosted on ec2 (tomcat listens on port 8080) but in Beanstalk it is port 80
     18. processes --> edit the 'default' --> Sessions --> Session stickiness -> tick the box 'Enabled'
+    19. Leave the other options with default --> Next
+    20. Monitoring
+        - Health reporting --> System --> Enhanced
+    21. Rolling updates and deployments
+        - Deployment policy --> rolling (for vprofile)
+        - Batch size type --> percentage
+        - Deployment batch size --> 50(%)
+        > Refer the AWS documentation for deployment policies 
+        ```
+        https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.rolling-version-deploy.html
+        ```
+    > Platform Software --> Environment properties --> In some case we may need to set the environment variables for the application like DB name, port number, or any other configuration..... can make use of this
+    22. Next --> review the Beanstalk configuration --> Submit to create
+    
+
 
     
 
