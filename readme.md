@@ -56,4 +56,71 @@
     2. Network and security --> private access and select the Backend security group
     - Next and Create Broker
 
-* 
+* Initialize the Database schema in RDS intance
+    - As the RDS is a private instance, create an ec2 instance in the same vpc and region as of RDS
+    - Launch an ec2 instnace of Ubuntu and install 'mysql' client
+    1. create a new security group for ec2 and add a rule to allow ssh from your IP
+    2. ssh to ec2
+    3. Use the below command to insatll mysql client to connect with RDS and git to clone the repo for DB schema
+
+    ```
+    sudo -i
+    ```
+
+    ```
+    apt update && apt install mysql-client git -y
+    ```
+    4. Add an inbound rule in Backend SG to allow port 3306 (mysql) from ec2 SG
+    5. Test the Login to MySQL
+    ```
+    mysql -h <rds endpoint> -u <username> -p<password>
+    ```
+    to login to database
+    ```
+    mysql -h <rds endpoint> -u <username> -p<password> <database name>
+    ```
+    > Note: To make sure the password is not visible in the terminal, use the below command which will prompt to enter the password as securestring
+    ```
+    mysql -h <rds endpoint> -u <username> -p
+    ```
+    once the login has no issues
+    ```
+    exit
+    ```
+    6. Clone the source code
+
+    ```
+    git clone <project url>
+    ```
+    > eg: 
+    ```
+    git clone https://github.com/hkhcoder/vprofile-project.git
+    ```
+
+    or
+
+    ```
+    git clone https://github.com/udemyDevops/aws-paas-and-saas.git
+    ```
+    7. change the working directory to the project folder
+    ```
+    cd <project dir>
+    ```
+    8. deploy the schema [_db_backup.sql_](src/main/resources/db_backup.sql)
+    
+    ```
+    mysql -h <rds endpoint> -u <username> -p<password> <database name> < <path of sql file>
+    ```
+    > eg: mysql -h <rds endpoint> -u <username> -p<password> accounts < src/main/resources/db_backup.sql
+
+    9. login to database to validate the DB initialization is done.
+    ```
+    mysql -h <rds endpoint> -u <username> -p<password> accounts
+    ```
+    ```
+    show tables;
+    ```
+    ```
+    exit
+    ```
+
