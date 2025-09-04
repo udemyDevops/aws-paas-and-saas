@@ -190,7 +190,44 @@
         ```
     > Platform Software --> Environment properties --> In some case we may need to set the environment variables for the application like DB name, port number, or any other configuration..... can make use of this
     22. Next --> review the Beanstalk configuration --> Submit to create
+    > ec2 instances and autoscaling group will be created with respective SGs part of Beanstalk
+
+* Add an inbound rule in the Backend SG to allow all traffic from SG attached to Beanstalk ec2 instances
+
+* Build and deploy artifact to Beanstalk
+    - first get the endpoints and port numbers of backend services
+        1. RDS endpoint (also username and password)
+        2. Amazon MQ --> Connections --> endpoints (exclude amqps://). It will also has the port number which needs to be updated in the application configuration file (also username and password).
+        3. Memecached --> configuration endpoint (also has port number).
+    - Clone the git repository 
+        * 'https://github.com/hkhcoder/vprofile-project' and change the branch to 'awsrefactor'
+        >or
+        * 'https://github.com/udemyDevops/aws-paas-and-saas'
+    - update the backend services details in [_application.properties_](src/main/resources/application.properties)
+    - In VS code --> 'ctrl+shift+P' --> type 'terminal: select default profile' --> git bash
+    - make sure the working directory is pointed to the project folder, where the pom.xml is located along with 'src/main/resources' (default path which maven looks for application.properties)
     
+    ```
+    mvn -version
+    ```
+    > maven should be 3.9.x and java be 17 or higher. If a different version then unistall and install the required version
+
+    ```
+    mvn install
+    ```
+    > Once the build is completed --> 'target' folder with artifact (.war file) will be created in the project folder 
+
+    - Go to Beanstalk in AWS --> upload and deploy --> upload the .war file and give sme version for it
+        * deployment preferences -- keep the default unless required to change
+            1. deployment policy --> rolling
+            2. batch size type --> percentage or fixed (depending on the number of instances)
+        * click on 'deploy'
+        * can check the events under the beanstalk
+* Add ACM certificate to make it _https_
+    - under beanstalk --> go to _configuration_ --> instance traffic and scaling --> edit --> load balancer listeners --> add listener --> port '443', protocl 'https', select the ssl certificate --> save --> apply
+    - now add the CNAME record for the beanstalk domain endpoint in r53 or domain provider
+
+
 
 
     
