@@ -227,9 +227,31 @@
     - under beanstalk --> go to _configuration_ --> instance traffic and scaling --> edit --> load balancer listeners --> add listener --> port '443', protocl 'https', select the ssl certificate --> save --> apply
     - now add the CNAME record for the beanstalk domain endpoint in r53 or domain provider
 
-
-
-
+* Create a CloudFront distribution in AWS
+    - Get started
+        1. name, descripotion
+        2. distribution type --> single website or app
+        3. custom domain (optional) --> can add the DNS name here
+        4. Next (by clicking on Next it will check for domain if anything added as DNS) --> skip domain setup
+    - Specify origin
+        1. origin type --> ELB 
+        2. origin --> browse load balancers --> select region, version (application/networl load balancer) and load balancer of beanstalk
+        3. Settings
+            * origin settings --> customize origin settings --> protocol (Match viewer for both http and https)
+            * cache settings --> customize --> protocol (both http and https), http methods (all)
+        4. Next
+    - Enable security
+        * WAF --> do not enable security protection (only for this practice)
+        * Next
+    - Review and create distribution
+    - while it is deploying, add the domain
+        * under distribution --> general --> alternate domain names --> add domain --> <hostname.domainName> (should match with the CNAME record in DNS) --> Next
+        >eg: vprofile.abc.com (hostname --> vprofile should be the same when adding CNAME in abc.com)
+        * Select/create the certificate for the domain --> Next --> add domain
+        * Now, add the CNAME record for 'distribution domain name' (remove https://) in the DNS provider and should match the alternate domain added in previous step.
+        > under distribution --> general --> details --> distribution domain name
+    
+    
     
 
 
